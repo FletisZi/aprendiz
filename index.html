@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="container">
+        <img src="Desktop - 1.svg" onload="fetchSvg(this)"  />
+        
+    </div>
+    <div class="alert">
+        Este não é o item correto!
+
+    </div>
+    <script>
+        const estados = [];
+
+        const fetchSvg = (image) => {
+            fetch(image.src)
+                .then((response) => response.text())
+                .then((response) => {
+                    const span = document.createElement('span');
+                    span.innerHTML = response;
+                    const inlineSvg = span.getElementsByTagName('svg')[0];
+                    image.parentNode.replaceChild(inlineSvg, image);
+                    return true;
+                })
+                .then(() => { getActions(); });
+        };
+
+        
+
+        const getActions = ()=>{
+            
+            const elementos = document.querySelectorAll('a');
+            for(let i = 0; i <= (elementos.length -1); i++) {
+                
+                elementos[i].onclick= () => { stateClicked(elementos[i]); } ;
+            }
+        }
+
+        const stateClicked = (state) => {
+            const name = state.getAttribute('name');
+            if(name == "montanhas"){
+                alert('voce ganhou podem casar comigo!');
+            }else{
+                alert('não foi desta vez')
+            }
+        };
+        
+        // const getActions = () => {
+        //     const states = document.getElementsByClassName('estado');
+        //     for(let i = 0; i < states.length; i++) {
+        //         states[i].onclick = () => { stateClicked(states[i]); };
+        //     }
+        //     getEstados();
+        // };
+
+        // const getEstados = () => {
+        //     fetch('estados.json')
+        //         .then((response) => response.text())
+        //         .then((response) => {
+        //             estados.push(...JSON.parse(response));
+        //         });
+        // };
+
+        
+
+        // const fillContent = ({ nome, sigla, populacao, descricao }) => {
+        //     const name = document.getElementById('stateName');
+        //     const population = document.getElementById('statePop');
+        //     const description = document.getElementById('stateDesc');
+
+        //     name.innerText = `${nome} (${sigla})`;
+        //     population.innerText = `População: ${populacao}`;
+        //     description.innerText = descricao;
+        // };
+    </script>
+
+
+</html>
+
+<script>
+    
+</script>
